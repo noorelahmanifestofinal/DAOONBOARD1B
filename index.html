@@ -10,11 +10,8 @@ html_content = """
             margin: 40px;
             line-height: 1.6;
         }
-        h1 {
+        h1, h2 {
             color: #2c3e50;
-        }
-        h2 {
-            color: #16a085;
         }
         code {
             background: #f4f4f4;
@@ -28,9 +25,6 @@ html_content = """
             margin: 20px 0;
             font-family: monospace;
         }
-        ul {
-            margin-left: 20px;
-        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -42,7 +36,7 @@ html_content = """
             text-align: center;
         }
         th {
-            background-color: #16a085;
+            background-color: #2c3e50;
             color: white;
         }
     </style>
@@ -77,50 +71,49 @@ html_content = """
     </tbody>
 </table>
 
-<h2>Step-by-Step</h2>
+<h2>🛠️ Step-by-Step</h2>
 <ol>
-    <li>Connect to BNB Chain using a Web3 wallet (e.g., MetaMask).</li>
-    <li>Check your current phase with <code>getCurrentPhase()</code>:
-        <ul>
-            <li>Returns your current phase number and the required USD price.</li>
-        </ul>
-    </li>
-    <li>Get the current BNB/USD price via Chainlink from the contract’s <code>getLatestBNBPrice()</code>.</li>
-    <li>Call <code>calculateRequiredBNB(usdPrice)</code> to know how much BNB to send.</li>
-    <li>Call <code>swap()</code> and send the exact required BNB to receive your NWR5 tokens.</li>
+    <li>Connect MetaMask to BNB Chain.</li>
+    <li>Check your current phase with <code>getCurrentPhase()</code>.</li>
+    <li>Get current BNB/USD via <code>getLatestBNBPrice()</code>.</li>
+    <li>Call <code>calculateRequiredBNB(usdPrice)</code> to compute the exact BNB needed.</li>
+    <li>Send that BNB to <code>swap()</code>.</li>
 </ol>
 
-<h2>Example</h2>
+<h2>📌 Real Example</h2>
 <div class="example">
     Phase: 1<br>
     USD Price: $70<br>
-    BNB/USD (Chainlink): $420<br>
-    Required BNB = ($70 * 1e18 * 1e8) / (420 * 1e8) = 0.166666... BNB<br>
-    ➜ Send at least <strong>0.16667 BNB</strong> to <code>swap()</code>
+    Chainlink BNB/USD: $420<br>
+    Required BNB = ($70 * 1e18 * 1e8) / (420 * 1e8) = 0.16667 BNB<br>
+    ➜ Send <strong>0.16667 BNB</strong> to <code>swap()</code>
 </div>
 
-<p>After successful swap:</p>
+<p>After swapping, you will:</p>
 <ul>
-    <li>Your wallet will receive <strong>7,454,385,000 NWR5</strong></li>
-    <li>Your address is added to <code>participants[]</code></li>
-    <li>Your phase is recorded with <code>userPhase[msg.sender]</code></li>
+    <li>Receive <strong>7,454,385,000 NWR5</strong> tokens</li>
+    <li>Be registered as a DAO participant</li>
+    <li>Have your phase and reward logged</li>
 </ul>
 
-<h2>Migration (Optional)</h2>
-<p>If a new contract is set via <code>setNextContract()</code>, you can move your data and rewards by calling <code>migrateSelf()</code>.</p>
+<h2>🔄 Migration (Optional)</h2>
+<p>If a new contract is set via <code>setNextContract()</code>, use <code>migrateSelf()</code> to transfer your rewards and phase info.</p>
 
-<h2>Contract Info</h2>
+<h2>🔗 Contract Info</h2>
 <ul>
     <li>NWR5 Token Address (BNB): <code>0x82bec0319B99DeC808330B4a490Aef102f7Fbec7</code></li>
     <li>BNB/USD Chainlink Feed: <code>0x0567F2323251f0Aab15c8dFb1967E4e8A7D42aeE</code></li>
+    <li>DAOOnboardingSwap Contract welcome to first 100k members:
+        <a href="https://bscscan.com/address/0x0fAA9A6e089D68e3DC0C0F8f75Fa6b610e2f0Dd1#writeContract" target="_blank">
+            0x0fAA9A6e089D68e3DC0C0F8f75Fa6b610e2f0Dd1
+        </a>
+    </li>
+    <li>DAO Swap Contract welcome 1B members:
+        <a href="https://bscscan.com/address/0x4E002932796b3e639cB172c8Cd3DD3B0588b14D3#writeContract" target="_blank">
+            0x4E002932796b3e639cB172c8Cd3DD3B0588b14D3
+        </a>
+    </li>
 </ul>
 
 </body>
 </html>
-"""
-
-html_path = "/mnt/data/How_to_Use_DAOOnboardingSwap_BSC.html"
-with open(html_path, "w", encoding="utf-8") as file:
-    file.write(html_content)
-
-html_path
